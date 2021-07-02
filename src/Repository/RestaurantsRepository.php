@@ -19,6 +19,26 @@ class RestaurantsRepository extends ServiceEntityRepository
         parent::__construct($registry, Restaurants::class);
     }
 
+    /**
+    * @return Restaurants[] Returns an array of Restaurants objects
+    */
+    
+    public function findRestaurantsWhithMenu($menu)
+    {
+        $allRestaurants=$this->findAll();
+        $reastaurants=array();
+        foreach($allRestaurants as $reastaurant){
+            $menus = array();
+            foreach($reastaurant->getMenus() as $m){
+                array_push($menus,$m->getId());
+            }
+            if(in_array($menu->getId(),$menus)){
+                array_push($reastaurants,$reastaurant);
+            }
+        }
+        return $reastaurants;
+    }
+    
     // /**
     //  * @return Restaurants[] Returns an array of Restaurants objects
     //  */

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<div class=" text-gray-200 ">
+  <div class="max-w-6xl mx-auto px-5 py-24 ">
+    <div class="flex flex-wrap -m-4">
+        {% for menu in Menus %}
+            <div class="w-96 p-4 ">
+              <div class="border border-gray-300 p-6 rounded-lg bg-gray-900">
+                <div class="flex justify-between">  
+                  <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                    <img  src="{{ asset('build/img/menu.png') }}" alt="">
+                  </div>
+                  <a href="" class="w-10 h-10 inline-flex items-center justify-center text-3xl rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                    +
+                  </a>
+                </div>
+                <h2 class="text-lg  font-medium title-font mb-2">Entrée : {{menu.entree}}</h2>
+                <h2 class="text-lg  font-medium title-font mb-2">Plat : {{menu.plat}}</h2>
+                <h2 class="text-lg  font-medium title-font mb-2">Dessert : {{menu.dessert}}</h2>
+                <div class="text-center mt-4 leading-none flex justify-between w-full mb-4">
+                  <span class=" mr-3 inline-flex items-center leading-none text-sm  py-1 ">
+                    
+                  </span>
+                  <span class=" inline-flex items-center leading-none text-sm">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                  </span>
+                </div>
+                <div>
+                  <span class="mr-1  py-1 text-white text-sm italic grid">
+                    hogefug afoogfhfgjgkh jlkhjlkhjklhu iolgd rtsreter sdfgsdf sdfsdf sdfdsf
+                  </span>
+                  <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                  </span>
+                </div>
+                <div>
+                  <span class="mr-1  py-1 text-white text-sm italic grid">
+                    hogefug afoogfhfgjgkh jlkhjlkhjklhu iolgd rtsreter sdfgsdf sdfsdf sdfdsf
+                  </span>
+                  <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                  </span>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

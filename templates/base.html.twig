@@ -15,10 +15,10 @@
     </head>
     <body>
         <!-- component -->
-<nav class=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
+<nav class=" bg-gray-900 w-full flex relative justify-between items-center mx-auto px-8 h-20">
     <!-- logo -->
     <div class="inline-flex">
-        <a class="_o6689fn" href="/">
+        <a  href="{{path('menus')}}">
             <div class="hidden md:block">
                 <img class="w-12 h-12" src="{{ asset('build/img/restaurant.png') }}"/>
             </div>
@@ -30,13 +30,13 @@
     
     <!-- login -->
     <div class="flex-initial">
-      <div class="flex justify-end items-center relative">
+      <div class="flex justify-end items-center relative text-white">
        
         <div class="flex mr-4 items-center">
-          <a class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full" href="#">
+          <a class="inline-block py-2 px-3 hover:bg-gray-200 hover:text-black rounded-full" href="{{path('menus')}}">
             <div class="flex items-center relative cursor-pointer whitespace-nowrap">Menus</div>
           </a>
-            <a class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full" href="#">
+            <a class="inline-block py-2 px-3 hover:bg-gray-200 hover:text-black rounded-full" href="{{path('restaurants')}}">
             <div class="flex items-center relative cursor-pointer whitespace-nowrap">Restaurants</div>
           </a>
         </div>
