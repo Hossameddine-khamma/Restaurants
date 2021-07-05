@@ -8,7 +8,7 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
@@ -33,15 +33,19 @@
       <div class="flex justify-end items-center relative text-white">
        
         <div class="flex mr-4 items-center">
-          <a class="inline-block py-2 px-3 hover:bg-gray-200 hover:text-black rounded-full" href="{{path('menus')}}">
-            <div class="flex items-center relative cursor-pointer whitespace-nowrap">Menus</div>
-          </a>
+            <a class="inline-block py-2 px-3 hover:bg-gray-200 hover:text-black rounded-full" href="{{path('menus')}}">
+              <div class="flex items-center relative cursor-pointer whitespace-nowrap">Menus</div>
+            </a>
             <a class="inline-block py-2 px-3 hover:bg-gray-200 hover:text-black rounded-full" href="{{path('restaurants')}}">
-            <div class="flex items-center relative cursor-pointer whitespace-nowrap">Restaurants</div>
-          </a>
+              <div class="flex items-center relative cursor-pointer whitespace-nowrap">Restaurants</div>
+            </a>
+            <a class="inline-block py-2 px-3 hover:bg-gray-200 hover:text-black rounded-full" href="{{path('app_login')}}">
+              <div class="flex items-center relative cursor-pointer whitespace-nowrap">Se connecter</div>
+            </a>
         </div>
 
         <div class="block">
+        <a href="{{path('users')}}">
             <div class="inline relative">
                 <button type="button" class="inline-flex items-center relative px-2 border rounded-full hover:shadow-lg">
                     <div class="pl-1">
@@ -75,6 +79,7 @@
                     </div>
                 </button>
             </div>
+        </a>
         </div>
       </div>
     </div>

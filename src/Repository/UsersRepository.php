@@ -36,6 +36,22 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->_em->flush();
     }
 
+    /**
+    * @return commande Returns not validated commande
+    */
+    
+    public function findNotvalidatedCommande(Users $user)
+    {
+        $commandes= $user->getCommandes();
+        foreach($commandes as $commande){
+            if (!$commande->getStatus()){
+                return $commande;
+            }
+        }
+        return null ;
+    }
+    
+
     // /**
     //  * @return Users[] Returns an array of Users objects
     //  */

@@ -20,12 +20,12 @@ class Commandes
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $Type;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $Heure;
 
@@ -55,6 +55,16 @@ class Commandes
      * @ORM\OneToOne(targetEntity=Commentaires::class, inversedBy="commandes", cascade={"persist", "remove"})
      */
     private $Commentaires;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Status;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Valide;
 
     public function __construct()
     {
@@ -158,6 +168,30 @@ class Commandes
     public function setCommentaires(?Commentaires $Commentaires): self
     {
         $this->Commentaires = $Commentaires;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->Status;
+    }
+
+    public function setStatus(bool $Status): self
+    {
+        $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getValide(): ?bool
+    {
+        return $this->Valide;
+    }
+
+    public function setValide(bool $Valide): self
+    {
+        $this->Valide = $Valide;
 
         return $this;
     }

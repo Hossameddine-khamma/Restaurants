@@ -13,9 +13,6 @@
                   <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                     <img  src="{{ asset('build/img/menu.png') }}" alt="">
                   </div>
-                  <a href="{{path('addCommande',{menu:menu.id , restaurant:IdRestaurant})}}" class="w-10 h-10 inline-flex items-center justify-center text-3xl rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    +
-                  </a>
                 </div>
                 <h2 class="text-lg  font-medium title-font mb-2">Entrée : {{menu.entree}}</h2>
                 <h2 class="text-lg  font-medium title-font mb-2">Plat : {{menu.plat}}</h2>
@@ -32,29 +29,10 @@
                     <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
                   </span>
                 </div>
-                <div>
-                  <span class="mr-1  py-1 text-white text-sm italic grid">
-                    hogefug afoogfhfgjgkh jlkhjlkhjklhu iolgd rtsreter sdfgsdf sdfsdf sdfdsf
-                  </span>
-                  <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
-                  </span>
-                </div>
-                <div>
-                  <span class="mr-1  py-1 text-white text-sm italic grid">
-                    hogefug afoogfhfgjgkh jlkhjlkhjklhu iolgd rtsreter sdfgsdf sdfsdf sdfdsf
-                  </span>
-                  <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
-                  </span>
+                <div class="mx-2 my-2 flex justify-end">
+                  <a class="mr-1 px-2 py-1 text-gray-500 text-sm italic grid hover:underline">
+                    Donner son avis
+                  </a>
                 </div>
               </div>
             </div>

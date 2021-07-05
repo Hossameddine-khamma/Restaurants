@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Commandes;
+use App\Entity\Restaurants;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +19,79 @@ class CommandesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commandes::class);
     }
+
+
+    /**
+    * @return Commandes[] Returns an array of commandes objects
+    */
+    
+    public function findCommandesRestaurantNonValide($id)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.Restaurants = :val')    
+            ->andWhere('r.Valide = :val1')
+            ->setParameters([
+                'val'=> $id,
+                'val1'=>false
+                ])
+            ->orderBy('r.Heure', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+    * @return Restaurants[] Returns an array of Restaurants objects
+    */
+    
+    public function findRestaurantOfusersValidCommandes($id)
+    {
+        
+        $commandes=$this->createQueryBuilder('c')
+            ->andWhere('c.users = :val')    
+            ->andWhere('c.Valide = :val1')
+            ->setParameters([
+                'val'=> $id,
+                'val1'=>true
+                ])
+            ->orderBy('c.Heure', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+        $restaurants=array();
+        foreach($commandes as $commande){
+            array_push($restaurants,$commande->getRestaurants());
+        }
+        return $restaurants;
+    }
+
+    /**
+    * @return Menus[] Returns an array of Menus objects
+    */
+    
+    public function findMenusOfusersValidCommandes($id)
+    {
+        
+        $commandes=$this->createQueryBuilder('c')
+            ->andWhere('c.Restaurants = :val')    
+            ->andWhere('c.Valide = :val1')
+            ->setParameters([
+                'val'=> $id,
+                'val1'=>true
+                ])
+            ->orderBy('c.Heure', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+        $Menus=array();
+        foreach($commandes as $commande){
+            foreach($commande->getMenus() as $menu){
+                array_push($Menus,$menu);
+            }
+        }
+        return $Menus;
+    }
+
 
     // /**
     //  * @return Commandes[] Returns an array of Commandes objects

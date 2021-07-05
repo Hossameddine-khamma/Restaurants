@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<div class=" text-gray-200 ">
+  <div class="max-w-6xl mx-auto px-5 py-24 ">
+    <div class="flex flex-wrap -m-4">
+    {% if commande is not null %}
+      {% for menu in commande.menus %}
+        <div class="w-96 p-4 ">
+          <div class="border border-gray-300 p-6 rounded-lg bg-gray-900">
+            <div class="flex justify-between">  
+              <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                <img  src="{{ asset('build/img/menu.png') }}" alt="">
+              </div>
+            </div>
+            <h2 class="text-lg  font-medium title-font mb-2">Entrée : {{menu.entree}}</h2>
+            <h2 class="text-lg  font-medium title-font mb-2">Plat : {{menu.plat}}</h2>
+            <h2 class="text-lg  font-medium title-font mb-2">Dessert : {{menu.dessert}}</h2>
+            <div class="text-center mt-4 leading-none flex justify-between w-full mb-4">
+              <span class=" mr-3 inline-flex items-center leading-none text-sm  py-1 ">
+                
+              </span>
+            </div>
+            <div class="flex justify-between">
+              <a class="mr-1  py-1 text-white text-sm italic grid">
+                restaurant : {{ commande.restaurants.nom }}
+              </a>
+              <a href="" class="mr-1  py-1 text-white text-sm italic grid">
+                supprimer
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="submit flex justify-end">
+    <a href="{{path('CommandeContinuer',{commande:commande.id})}}" class="mt-3 text-lg font-semibold 
+              bg-gray-900 text-white rounded-lg
+              px-6 py-3 block shadow-xl mr-12">
+              Continuer
+              </a>
+  </div>
+  {% elseif commande == null %}
+      <div class="mx-auto alert flex flex-row items-center bg-blue-200 p-5 rounded border-b-2 border-blue-300">
+			<div class="alert-icon flex items-center bg-blue-100 border-2 border-blue-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
+				<span class="text-blue-500">
+					<svg fill="currentColor"
+						 viewBox="0 0 20 20"
+						 class="h-6 w-6">
+						<path fill-rule="evenodd"
+							  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+							  clip-rule="evenodd"></path>
+					</svg>
+				</span>
+			</div>
+			<div class="alert-content ml-4">
+				<div class="alert-title font-semibold text-lg text-blue-800">
+					Info
+				</div>
+				<div class="alert-description text-sm text-blue-600">
+					veuillez choisir vos menus
+				</div>
+			</div>
+		</div>
+    {% endif %} 
+</div>
+{% endblock %}

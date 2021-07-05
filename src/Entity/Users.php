@@ -22,7 +22,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true ,nullable=true)
      */
     private $Identifiant;
 
@@ -33,7 +33,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string" , nullable=true)
      */
     private $password;
 
@@ -48,12 +48,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private $Prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true )
      */
     private $Email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 ,nullable=true)
      */
     private $Adresse;
 
@@ -76,6 +76,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToMany(targetEntity=Notes::class, inversedBy="users")
      */
     private $Notes;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $Activation_Token;
 
     public function __construct()
     {
@@ -313,6 +318,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeNote(Notes $note): self
     {
         $this->Notes->removeElement($note);
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->Activation_Token;
+    }
+
+    public function setActivationToken(?string $Activation_Token): self
+    {
+        $this->Activation_Token = $Activation_Token;
 
         return $this;
     }
