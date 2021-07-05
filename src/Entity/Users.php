@@ -72,21 +72,23 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $Commandes;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Notes::class, inversedBy="users")
-     */
-    private $Notes;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $Activation_Token;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommentairesMenus::class, mappedBy="User", orphanRemoval=true)
+     */
+    private $commentairesMenuses;
+
     public function __construct()
     {
         $this->Commentaires = new ArrayCollection();
         $this->Commandes = new ArrayCollection();
         $this->Notes = new ArrayCollection();
+        $this->commentairesMenuses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -298,30 +300,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Notes[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->Notes;
-    }
-
-    public function addNote(Notes $note): self
-    {
-        if (!$this->Notes->contains($note)) {
-            $this->Notes[] = $note;
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Notes $note): self
-    {
-        $this->Notes->removeElement($note);
-
-        return $this;
-    }
-
     public function getActivationToken(): ?string
     {
         return $this->Activation_Token;
@@ -330,6 +308,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActivationToken(?string $Activation_Token): self
     {
         $this->Activation_Token = $Activation_Token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentairesMenus[]
+     */
+    public function getCommentairesMenuses(): Collection
+    {
+        return $this->commentairesMenuses;
+    }
+
+    public function addCommentairesMenus(CommentairesMenus $commentairesMenus): self
+    {
+        if (!$this->commentairesMenuses->contains($commentairesMenus)) {
+            $this->commentairesMenuses[] = $commentairesMenus;
+            $commentairesMenus->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentairesMenus(CommentairesMenus $commentairesMenus): self
+    {
+        if ($this->commentairesMenuses->removeElement($commentairesMenus)) {
+            // set the owning side to null (unless already changed)
+            if ($commentairesMenus->getUser() === $this) {
+                $commentairesMenus->setUser(null);
+            }
+        }
 
         return $this;
     }

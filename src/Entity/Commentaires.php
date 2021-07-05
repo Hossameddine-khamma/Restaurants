@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentairesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,9 +31,20 @@ class Commentaires
     private $users;
 
     /**
-     * @ORM\OneToOne(targetEntity=Commandes::class, mappedBy="Commentaires", cascade={"persist", "remove"})
+     * @ORM\Column(type="integer")
      */
-    private $commandes;
+    private $Note;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurants::class, inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Restaurant;
+
+    public function __construct()
+    {
+        $this->Restaurant = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -62,24 +75,27 @@ class Commentaires
         return $this;
     }
 
-    public function getCommandes(): ?Commandes
+
+    public function getNote(): ?int
     {
-        return $this->commandes;
+        return $this->Note;
     }
 
-    public function setCommandes(?Commandes $commandes): self
+    public function setNote(int $Note): self
     {
-        // unset the owning side of the relation if necessary
-        if ($commandes === null && $this->commandes !== null) {
-            $this->commandes->setCommentaires(null);
-        }
+        $this->Note = $Note;
 
-        // set the owning side of the relation if necessary
-        if ($commandes !== null && $commandes->getCommentaires() !== $this) {
-            $commandes->setCommentaires($this);
-        }
+        return $this;
+    }
 
-        $this->commandes = $commandes;
+    public function getRestaurant(): ?Restaurants
+    {
+        return $this->Restaurant;
+    }
+
+    public function setRestaurant(?Restaurants $Restaurant): self
+    {
+        $this->Restaurant = $Restaurant;
 
         return $this;
     }
