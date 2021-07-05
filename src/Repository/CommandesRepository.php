@@ -30,6 +30,7 @@ class CommandesRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->andWhere('r.Restaurants = :val')    
             ->andWhere('r.Valide = :val1')
+            ->andWhere('r.Heure is not null')
             ->setParameters([
                 'val'=> $id,
                 'val1'=>false

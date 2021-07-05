@@ -127,8 +127,36 @@ class DefaultController extends AbstractController
     {
         
         $session =$request->getSession();
+        $securityContext = $this->container->get('security.authorization_checker');
         if(!$session->get('NotActivatedUsers')){
+            if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') || $securityContext->isGranted('IS_AUTHENTICATED_FULLY')){
+                $user = $this->get('security.token_storage')->getToken()->getUser();
+                if(!$usersRepository->findNotvalidatedCommande($user)){
+                    $commande= new Commandes();
+                    $commande->setUsers($user);
+                    $commande->addMenu($menu);
+                    $commande->setRestaurants($restaurant);
+                    $commande->setStatus(false);
+                    $commande->setValide(false);
+
+                    $em->persist($commande);
+                    $em->flush();
+                }else{
+                    $commande= $usersRepository->findNotvalidatedCommande($user);
+                    $commande->addMenu($menu);
+
+                    $em->persist($commande);
+                    $em->flush();
+                    //verifier le restaurant
+                    //$commande->setRestaurants($restaurant);
+                }
+                $em->persist($commande);
+                $em->flush();
+
+                return $this->redirectToRoute('restaurantsMenu',['id'=>$restaurant->getid()]);
+            }
             return $this->redirectToRoute('users');
+
         }else{
             $user=$usersRepository->findOneBy(['Email' => $session->get('NotActivatedUsers')->getEmail()]);
             if(!$usersRepository->findNotvalidatedCommande($user)){
@@ -137,6 +165,7 @@ class DefaultController extends AbstractController
                 $commande->addMenu($menu);
                 $commande->setRestaurants($restaurant);
                 $commande->setStatus(false);
+                $commande->setValide(false);
 
                 $em->persist($commande);
                 $em->flush();

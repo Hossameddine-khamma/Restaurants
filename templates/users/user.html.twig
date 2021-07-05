@@ -17,6 +17,9 @@
   </ul>
 </div>
 <div class=" text-gray-200 " id="commandeEnCours">
+{% for message in app.flashes('message')%}
+                        <h1 class="text-green-500 font-bold my-4 justify-items-center grid">{{message}}</h1>        
+                    {% endfor %}
     {% if commande is not null %}
         <div class="max-w-6xl mx-auto px-5 py-24 ">
             <div class="flex flex-wrap -m-4">
@@ -112,7 +115,7 @@
             <a href="{{path('userMenus',{id:restaurant.Id})}}" class="mr-1 px-2 py-1 text-gray-500 text-sm italic grid hover:underline">
               Consulter les menus commandés
             </a>
-            <a class="mr-1 px-2 py-1 text-gray-500 text-sm italic grid hover:underline">
+            <a href="{{path('userRestaurantsComentaire',{id:restaurant.Id})}}" class="mr-1 px-2 py-1 text-gray-500 text-sm italic grid hover:underline">
               Donner son avis
             </a>
           </div>

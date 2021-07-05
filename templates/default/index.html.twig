@@ -18,14 +18,22 @@
                   <h2 class="text-lg  font-medium title-font mb-2">Dessert : {{menu.dessert}}</h2>
                   <div class="text-center mt-4 leading-none flex justify-between w-full">
                     <span class=" mr-3 inline-flex items-center leading-none text-sm  py-1 ">
-                      40 Restaurants
+                      
                     </span>
                     <span class=" inline-flex items-center leading-none text-sm">
-                      <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                      <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                      <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                      <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                      <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                    {% set max = 5 %}
+                    {% set i = menu.moyenne %}
+                    {% if i is not null  %}
+                      {% set j = 0 %}
+                      {% for j in 0..5 %}
+                        {% if j < i %}
+                        <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                        {% set j = j + 1 %}
+                        {% elseif j > i %}
+                        <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
                     </span>
                   </div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\CommentairesRepository;
 use App\Repository\RestaurantsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,10 +45,6 @@ class Restaurants
      */
     private $commentaires;
 
-    /**
-     * @ORM\OneToMany(targetEntity=CommentairesMenus::class, mappedBy="Restaurant", orphanRemoval=true)
-     */
-    private $commentairesMenuses;
 
 
     public function __construct()
@@ -190,34 +187,49 @@ class Restaurants
         return $this;
     }
 
-    /**
-     * @return Collection|CommentairesMenus[]
-     */
-    public function getCommentairesMenuses(): Collection
-    {
-        return $this->commentairesMenuses;
-    }
-
-    public function addCommentairesMenus(CommentairesMenus $commentairesMenus): self
-    {
-        if (!$this->commentairesMenuses->contains($commentairesMenus)) {
-            $this->commentairesMenuses[] = $commentairesMenus;
-            $commentairesMenus->setRestaurant($this);
+    public function getmoyenne(){
+        $commentaires=$this->getCommentaires();
+        $i=0;
+        $somme=0;
+        foreach($commentaires as $commentaire){
+            $somme=$commentaire->getNote();
+            $i++;
         }
-
-        return $this;
+        if($i==0){
+            return null;
+        }
+        $moyenne=$somme/$i;
+        return round($moyenne,1,PHP_ROUND_HALF_DOWN);
     }
 
-    public function removeCommentairesMenus(CommentairesMenus $commentairesMenus): self
-    {
-        if ($this->commentairesMenuses->removeElement($commentairesMenus)) {
-            // set the owning side to null (unless already changed)
-            if ($commentairesMenus->getRestaurant() === $this) {
-                $commentairesMenus->setRestaurant(null);
+    public function getBestCommentaire(){
+        $commentaires=$this->getCommentaires();
+        if($commentaires[0]){
+            $bestCommentaire=$commentaires[0];
+            $max = $bestCommentaire->getNote();
+            foreach($commentaires as $commentaire){
+                if($commentaire->getNote() > $max){
+                    $max=$commentaire->getNote();
+                    $bestCommentaire=$commentaire;
+                }
             }
+            return $bestCommentaire;
         }
-
-        return $this;
+        return null;
     }
-
+    public function getworstCommentaire(){
+        $commentaires=$this->getCommentaires();
+        if($commentaires[0]){
+            $min=$commentaires[0]->getNote();
+            $worstCommentaire=$commentaires[0];
+            foreach($commentaires as $commentaire){
+                if($commentaire->getNote() < $min){
+                    $min=$commentaire->getNote();
+                    $worstCommentaire=$commentaire;
+                }
+            }
+            return $worstCommentaire;
+        }
+        return null;
+    }
 }

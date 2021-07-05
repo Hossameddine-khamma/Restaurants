@@ -44,10 +44,16 @@ class Menus
      */
     private $restaurants;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommentairesMenus::class, mappedBy="Menus", orphanRemoval=true)
+     */
+    private $commentairesMenuses;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
+        $this->commentairesMenuses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -143,5 +149,81 @@ class Menus
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|CommentairesMenus[]
+     */
+    public function getCommentairesMenuses(): Collection
+    {
+        return $this->commentairesMenuses;
+    }
+
+    public function addCommentairesMenus(CommentairesMenus $commentairesMenus): self
+    {
+        if (!$this->commentairesMenuses->contains($commentairesMenus)) {
+            $this->commentairesMenuses[] = $commentairesMenus;
+            $commentairesMenus->setMenus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentairesMenus(CommentairesMenus $commentairesMenus): self
+    {
+        if ($this->commentairesMenuses->removeElement($commentairesMenus)) {
+            // set the owning side to null (unless already changed)
+            if ($commentairesMenus->getMenus() === $this) {
+                $commentairesMenus->setMenus(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getmoyenne(){
+        $commentaires=$this->getCommentairesMenuses();
+        $i=0;
+        $somme=0;
+        foreach($commentaires as $commentaire){
+            $somme=$commentaire->getNote();
+            $i++;
+        }
+        if($i==0){
+            return null;
+        }
+        $moyenne=$somme/$i;
+        return round($moyenne,1,PHP_ROUND_HALF_DOWN);
+    }
+
+    public function getBestCommentaire(){
+        $commentaires=$this->getCommentairesMenuses();
+        if($commentaires[0]){
+            $bestCommentaire=$commentaires[0];
+            $max = $bestCommentaire->getNote();
+            foreach($commentaires as $commentaire){
+                if($commentaire->getNote() > $max){
+                    $max=$commentaire->getNote();
+                    $bestCommentaire=$commentaire;
+                }
+            }
+            return $bestCommentaire;
+        }
+        return null;
+    }
+    public function getworstCommentaire(){
+        $commentaires=$this->getCommentairesMenuses();
+        if($commentaires[0]){
+            $min=$commentaires[0]->getNote();
+            $worstCommentaire=$commentaires[0];
+            foreach($commentaires as $commentaire){
+                if($commentaire->getNote() < $min){
+                    $min=$commentaire->getNote();
+                    $worstCommentaire=$commentaire;
+                }
+            }
+            return $worstCommentaire;
+        }
+        return null;
     }
 }

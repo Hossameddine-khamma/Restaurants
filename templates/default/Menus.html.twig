@@ -25,36 +25,64 @@
                     
                   </span>
                   <span class=" inline-flex items-center leading-none text-sm">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                    {% set max = 5 %}
+                    {% set i = menu.moyenne %}
+                    {% if i is not null  %}
+                      {% set j = 0 %}
+                      {% for j in 0..5 %}
+                        {% if j < i %}
+                        <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                        {% set j = j + 1 %}
+                        {% elseif j > i %}
+                        <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
                   </span>
                 </div>
                 <div>
-                  <span class="mr-1  py-1 text-white text-sm italic grid">
-                    hogefug afoogfhfgjgkh jlkhjlkhjklhu iolgd rtsreter sdfgsdf sdfsdf sdfdsf
-                  </span>
-                  <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
-                  </span>
+                  {% if menu.bestCommentaire is not null %}
+                    <span class="mr-1 px-2 py-1 text-gray-500 text-sm italic grid">
+                      {{menu.bestCommentaire.valeur}}
+                    </span>
+                    <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
+                      {% set max = 5 %}
+                            {% set i = menu.bestCommentaire.Note %}
+                            {% if i is not null  %}
+                              {% set j = 0 %}
+                              {% for j in 0..5 %}
+                                {% if j < i %}
+                                <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                                {% set j = j + 1 %}
+                                {% elseif j > i %}
+                                <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                    </span>
+                  {% endif %}
                 </div>
                 <div>
-                  <span class="mr-1  py-1 text-white text-sm italic grid">
-                    hogefug afoogfhfgjgkh jlkhjlkhjklhu iolgd rtsreter sdfgsdf sdfsdf sdfdsf
-                  </span>
-                  <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
-                    <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
-                  </span>
+                  {% if menu.worstCommentaire is not null %}
+                    <span class="mr-1 px-2 py-1 text-gray-500 text-sm italic grid">
+                      {{menu.worstCommentaire.valeur}}
+                    </span>
+                    <span class=" px-2 py-1 inline-flex items-center leading-none text-sm">
+                      {% set max = 5 %}
+                            {% set i = menu.worstCommentaire.Note %}
+                            {% if i is not null  %}
+                              {% set j = 0 %}
+                              {% for j in 0..5 %}
+                                {% if j < i %}
+                                <img class="w-4 h-4" src="{{ asset('build/img/etoileJaune.png') }}" alt="">
+                                {% set j = j + 1 %}
+                                {% elseif j > i %}
+                                <img class="w-4 h-4" src="{{ asset('build/img/etoileGris.png') }}" alt="">
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                    </span>
+                  {% endif %}
                 </div>
               </div>
             </div>

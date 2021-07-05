@@ -34,10 +34,11 @@ class CommentairesMenus
     private $User;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Restaurants::class, inversedBy="commentairesMenuses")
+     * @ORM\ManyToOne(targetEntity=Menus::class, inversedBy="commentairesMenuses")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Restaurant;
+    private $Menus;
+
 
     public function getId(): ?int
     {
@@ -80,15 +81,16 @@ class CommentairesMenus
         return $this;
     }
 
-    public function getRestaurant(): ?Restaurants
+    public function getMenus(): ?Menus
     {
-        return $this->Restaurant;
+        return $this->Menus;
     }
 
-    public function setRestaurant(?Restaurants $Restaurant): self
+    public function setMenus(?Menus $Menus): self
     {
-        $this->Restaurant = $Restaurant;
+        $this->Menus = $Menus;
 
         return $this;
     }
+
 }

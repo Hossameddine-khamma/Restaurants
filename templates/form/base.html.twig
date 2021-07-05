@@ -193,3 +193,9 @@
         </div>
     </div>
 {% endblock %}
+
+{%- block textarea_widget -%}
+    <textarea class=" block w-full bg-grey-lighter text-grey-darker 
+    border border-red rounded py-3 px-4 mb-3 focus:outline-none
+    " {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock textarea_widget -%}
