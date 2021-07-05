@@ -20,13 +20,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
-* @Route("/user")
-*/
+
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/", name="user")
+     * @Route("/user", name="user")
      */
     public function index(CommandesRepository $CommandesRepository,UsersRepository $usersRepository)
     {
@@ -39,7 +37,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/menus/{id}", name="userMenus")
+     * @Route("user/menus/{id}", name="userMenus")
      */
     public function userMenus(Restaurants $restaurant, CommandesRepository $CommandesRepository)
     {
@@ -50,7 +48,7 @@ class UsersController extends AbstractController
     }
 
      /**
-     * @Route("/commentaire/{id}", name="userRestaurantsComentaire")
+     * @Route("user/commentaire/{id}", name="userRestaurantsComentaire")
      */
     public function userRestaurantsComentaire( $id,Request $request,RestaurantsRepository $restaurantsRepository, EntityManagerInterface $em)
     {
@@ -79,7 +77,7 @@ class UsersController extends AbstractController
     }
 
      /**
-     * @Route("/commentaire/menus/{id}", name="userMenusComentaire")
+     * @Route("user/commentaire/menus/{id}", name="userMenusComentaire")
      */
     public function userMenusComentaire( $id,Request $request,MenusRepository $MenusRepository, EntityManagerInterface $em)
     {

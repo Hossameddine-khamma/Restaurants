@@ -35,10 +35,6 @@ class Commandes
      */
     private $users;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Notes::class, inversedBy="commandes", cascade={"persist", "remove"})
-     */
-    private $Notes;
 
     /**
      * @ORM\ManyToOne(targetEntity=Restaurants::class, inversedBy="commandes")
@@ -50,11 +46,6 @@ class Commandes
      * @ORM\ManyToMany(targetEntity=Menus::class, inversedBy="commandes")
      */
     private $Menus;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Commentaires::class, inversedBy="commandes", cascade={"persist", "remove"})
-     */
-    private $Commentaires;
 
     /**
      * @ORM\Column(type="boolean")
@@ -112,17 +103,6 @@ class Commandes
         return $this;
     }
 
-    public function getNotes(): ?Notes
-    {
-        return $this->Notes;
-    }
-
-    public function setNotes(?Notes $Notes): self
-    {
-        $this->Notes = $Notes;
-
-        return $this;
-    }
 
     public function getRestaurants(): ?Restaurants
     {
@@ -160,17 +140,6 @@ class Commandes
         return $this;
     }
 
-    public function getCommentaires(): ?Commentaires
-    {
-        return $this->Commentaires;
-    }
-
-    public function setCommentaires(?Commentaires $Commentaires): self
-    {
-        $this->Commentaires = $Commentaires;
-
-        return $this;
-    }
 
     public function getStatus(): ?bool
     {
